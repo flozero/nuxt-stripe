@@ -1,9 +1,12 @@
 <template>
+  <h1>Nuxt Stripe module playground!</h1>
   <div>
-    Nuxt module playground!
+    {{ stripe }}
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { useClientStripe } from '#imports';
 
+const stripe = useClientStripe()
 </script>
