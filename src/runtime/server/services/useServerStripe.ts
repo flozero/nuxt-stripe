@@ -1,4 +1,5 @@
 import Stripe from "stripe"
+import { useRuntimeConfig } from '#imports'
 
 export const useServerStripe = async(event: any) => {
   const { stripe: { apiKey }, public: { stripe: { apiVersion }} } = useRuntimeConfig()
