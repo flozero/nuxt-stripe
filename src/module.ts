@@ -39,6 +39,8 @@ export default defineNuxtModule<ModuleOptions>({
   },
   setup (options, nuxt) {
     const resolver = createResolver(import.meta.url)
+    const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
+
     if (!options.publishableKey) {
       throw new Error('Missing publishableKey option')
     }
@@ -46,6 +48,7 @@ export default defineNuxtModule<ModuleOptions>({
       throw new Error('Missing apiKey option')
     }
 
+    // Add public and private runtime config
     nuxt.options.runtimeConfig.public.stripe = {
       publishableKey: options.publishableKey,
       locale: options.locale,
@@ -57,19 +60,16 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     // Transpile runtime
-    const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
     nuxt.options.build.transpile.push(runtimeDir)
 
-    addPlugin(resolver.resolve('./runtime/plugin'))
+    addPlugin(resolver.resolve(runtimeDir, 'plugins', 'supabase.client'))
     addImportsDir(resolver.resolve('./runtime/composables'))
 
     nuxt.hook('nitro:config', (nitroConfig) => {
       nitroConfig.alias = nitroConfig.alias || {}
-
       nitroConfig.externals = defu(typeof nitroConfig.externals === 'object' ? nitroConfig.externals : {}, {
         inline: [resolver.resolve('./runtime')]
       })
-
       nitroConfig.alias['#stripe/server'] = resolver.resolve('./runtime/server/services')
     })
 
