@@ -1,1 +1,1 @@
-export * from './useServerStripe'
+export { useServerStripe } from './useServerStripe'
