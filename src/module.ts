@@ -60,7 +60,7 @@ export default defineNuxtModule<ModuleOptions>({
     addPlugin(resolve('./runtime/plugins/stripe.client'))
     addImportsDir(resolve('./runtime/composables'))
 
-    addTemplate({
+    const template = addTemplate({
       filename: 'types/stripe.d.ts',
       getContents: () => `
         declare module '#stripe/server' {
@@ -69,17 +69,16 @@ export default defineNuxtModule<ModuleOptions>({
         export {}`
     })
 
+    nuxt.hook('prepare:types', ({ references }) => {
+      references.push({ path: template.dst })
+    })
+
     nuxt.hook('nitro:config', (nitroConfig) => {
       nitroConfig.alias = nitroConfig.alias || {}
       nitroConfig.externals = defu(typeof nitroConfig.externals === 'object' ? nitroConfig.externals : {}, {
         inline: [resolve('./runtime')]
       })
       nitroConfig.alias['#stripe/server'] = resolve('./runtime/server/services')
-    })
-
-
-    nuxt.hook('prepare:types', (options) => {
-      options.references.push({ path: resolve(nuxt.options.buildDir, 'types/stripe.d.ts') })
     })
   }
 })
