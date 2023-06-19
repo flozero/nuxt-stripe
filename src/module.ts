@@ -62,7 +62,7 @@ export default defineNuxtModule<ModuleOptions>({
     // Transpile runtime
     nuxt.options.build.transpile.push(runtimeDir)
 
-    addPlugin(resolver.resolve(runtimeDir, 'plugins', 'supabase.client'))
+    addPlugin(resolver.resolve(runtimeDir, 'plugins', 'stripe.client'))
     addImportsDir(resolver.resolve('./runtime/composables'))
 
     nuxt.hook('nitro:config', (nitroConfig) => {
