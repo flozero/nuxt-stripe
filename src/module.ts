@@ -1,6 +1,5 @@
 import { defineNuxtModule, addPlugin, createResolver, addImportsDir, addTemplate } from '@nuxt/kit'
 import defu from "defu"
-import { fileURLToPath } from 'url'
 
 export interface ModuleOptions {
   /**
@@ -54,9 +53,9 @@ export default defineNuxtModule<ModuleOptions>({
       apiVersion: options.apiVersion
     }
 
-    nuxt.options.runtimeConfig.stripe = defu(options, {
+    nuxt.options.runtimeConfig.stripe = {
       apiKey: options.apiKey
-    })
+    }
 
     addPlugin(resolve('./runtime/plugins/stripe.client'))
     addImportsDir(resolve('./runtime/composables'))
