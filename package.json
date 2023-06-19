@@ -29,7 +29,8 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.5.2",
-    "@stripe/stripe-js": "^1.54.0"
+    "@stripe/stripe-js": "^1.54.0",
+    "stripe": "^12.9.0"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.1.1",

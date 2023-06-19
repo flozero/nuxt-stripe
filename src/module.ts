@@ -1,4 +1,4 @@
-import { defineNuxtModule, addPlugin, createResolver, addImportsDir } from '@nuxt/kit'
+import { defineNuxtModule, addPlugin, createResolver, addImportsDir, addTemplate } from '@nuxt/kit'
 
 export interface ModuleOptions {
   /**
@@ -59,7 +59,20 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.hook('nitro:config', (nitroConfig) => {
       nitroConfig.alias = nitroConfig.alias || {}
-      nitroConfig.alias['#stripe'] = resolver.resolve('./runtime/services/index.ts')
+      nitroConfig.alias['#stripe/server'] = resolver.resolve('./runtime/server/services')
+    })
+
+    addTemplate({
+      filename: 'types/stripe.d.ts',
+      getContents: () => [
+        'declare module \'#stripe/server\' {',
+        `  const useServerStripe: typeof import('${resolver.resolve('./runtime/server/services')}').useServerStripe`,
+        '}'
+      ].join('\n')
+    })
+
+    nuxt.hook('prepare:types', (options) => {
+      options.references.push({ path: resolver.resolve(nuxt.options.buildDir, 'types/stripe.d.ts') })
     })
   }
 })
