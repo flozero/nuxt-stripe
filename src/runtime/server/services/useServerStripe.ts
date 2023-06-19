@@ -5,6 +5,7 @@ export const useServerStripe = async(event: any) => {
 
   if ( event.context._stripe ) return event.context._stripe
 
+  // As Stripe make ts fail when not setting the apiVersion, we need to ignore the error
   // @ts-ignore
   const stripe = new Stripe(apiKey, { apiVersion })
   event.context._stripe = stripe

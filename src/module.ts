@@ -38,8 +38,7 @@ export default defineNuxtModule<ModuleOptions>({
       apiVersion: "2022-11-15"
   },
   setup (options, nuxt) {
-    const resolver = createResolver(import.meta.url)
-    const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
+    const { resolve } = createResolver(import.meta.url)
 
     if (!options.publishableKey) {
       throw new Error('Missing publishableKey option')
@@ -55,35 +54,32 @@ export default defineNuxtModule<ModuleOptions>({
       apiVersion: options.apiVersion
     }
 
-    nuxt.options.runtimeConfig.stripe = {
+    nuxt.options.runtimeConfig.stripe = defu(options, {
       apiKey: options.apiKey
-    }
+    })
 
-    // Transpile runtime
-    nuxt.options.build.transpile.push(runtimeDir)
-
-    addPlugin(resolver.resolve(runtimeDir, 'plugins', 'stripe.client'))
-    addImportsDir(resolver.resolve('./runtime/composables'))
+    addPlugin(resolve('./runtime/plugins/stripe.client'))
+    addImportsDir(resolve('./runtime/composables'))
 
     nuxt.hook('nitro:config', (nitroConfig) => {
       nitroConfig.alias = nitroConfig.alias || {}
       nitroConfig.externals = defu(typeof nitroConfig.externals === 'object' ? nitroConfig.externals : {}, {
-        inline: [resolver.resolve('./runtime')]
+        inline: [resolve('./runtime')]
       })
-      nitroConfig.alias['#stripe/server'] = resolver.resolve('./runtime/server/services')
+      nitroConfig.alias['#stripe/server'] = resolve('./runtime/server/services')
     })
 
     addTemplate({
       filename: 'types/stripe.d.ts',
       getContents: () => [
         'declare module \'#stripe/server\' {',
-        `  const useServerStripe: typeof import('${resolver.resolve('./runtime/server/services')}').useServerStripe`,
+        `  const useServerStripe: typeof import('${resolve('./runtime/server/services')}').useServerStripe`,
         '}'
       ].join('\n')
     })
 
     nuxt.hook('prepare:types', (options) => {
-      options.references.push({ path: resolver.resolve(nuxt.options.buildDir, 'types/stripe.d.ts') })
+      options.references.push({ path: resolve(nuxt.options.buildDir, 'types/stripe.d.ts') })
     })
   }
 })

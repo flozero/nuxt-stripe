@@ -1,5 +1,4 @@
-import { defineNuxtPlugin } from '#app'
-
+import { defineNuxtPlugin } from '#imports'
 import { loadStripe } from '@stripe/stripe-js';
 
 export default defineNuxtPlugin(async(nuxtApp) => {
