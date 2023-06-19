@@ -1,4 +1,4 @@
-import { useServerStripe } from "#stripe/server"
+import { useServerStripe } from "#stripe/server";
 
 export default defineEventHandler(async (event) => { 
 

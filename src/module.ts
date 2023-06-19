@@ -1,4 +1,6 @@
 import { defineNuxtModule, addPlugin, createResolver, addImportsDir, addTemplate } from '@nuxt/kit'
+import defu from "defu"
+import { fileURLToPath } from 'url'
 
 export interface ModuleOptions {
   /**
@@ -54,11 +56,20 @@ export default defineNuxtModule<ModuleOptions>({
       apiKey: options.apiKey
     }
 
+    // Transpile runtime
+    const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
+    nuxt.options.build.transpile.push(runtimeDir)
+
     addPlugin(resolver.resolve('./runtime/plugin'))
     addImportsDir(resolver.resolve('./runtime/composables'))
 
     nuxt.hook('nitro:config', (nitroConfig) => {
       nitroConfig.alias = nitroConfig.alias || {}
+
+      nitroConfig.externals = defu(typeof nitroConfig.externals === 'object' ? nitroConfig.externals : {}, {
+        inline: [resolver.resolve('./runtime')]
+      })
+
       nitroConfig.alias['#stripe/server'] = resolver.resolve('./runtime/server/services')
     })
 
