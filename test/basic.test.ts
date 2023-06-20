@@ -18,7 +18,6 @@ describe('ssr', async () => {
     const html = await $fetch('/')
     expect(html).toContain('publishableKey:"pk_test_123"')
     expect(html).toContain('apiVersion:"2021-01-01"')
-    expect(html).toContain('locale:"fr"')
   })
 
   it.todo("validate ssr config")

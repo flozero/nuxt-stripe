@@ -1,5 +1,5 @@
 import { defineNuxtModule, addPlugin, createResolver, addTemplate, resolveModule } from '@nuxt/kit'
-import defu from "defu"
+import defu from 'defu'
 import { fileURLToPath } from 'url'
 
 export interface ModuleOptions {
@@ -15,15 +15,17 @@ export interface ModuleOptions {
    * Stripe private key for server side only
    * @example 'pk_test_yOipfsEBmvrjWhSJFMCMX0yf'
    * @type string | null
-   * @docs https://...
+   * @docs https://stripe.com/docs/api/authentication
    */
   apiKey: string | null,
 
-  // TODO: add more options
-  locale: string,
-
-  // TODO: add more options
-  apiVersion: string | "2022-11-15"
+  /**
+   * Stripe api version for server side only
+   * @example '2022-11-15'
+   * @type string | '2022-11-15'
+   * @docs https://stripe.com/docs/api/versioning
+   */
+  apiVersion: string | '2022-11-15'
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -37,8 +39,7 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
       publishableKey: null,
       apiKey: null,
-      locale: 'en',
-      apiVersion: "2022-11-15"
+      apiVersion: '2022-11-15'
   },
   setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
@@ -57,7 +58,6 @@ export default defineNuxtModule<ModuleOptions>({
     // Public runtimeConfig
     nuxt.options.runtimeConfig.public.stripe = defu(nuxt.options.runtimeConfig.public.stripe, {
       publishableKey: options.publishableKey,
-      locale: options.locale,
       apiVersion: options.apiVersion
     })
 

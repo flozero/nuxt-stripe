@@ -93,7 +93,6 @@ export default defineNuxtConfig({
   stripe: { 
     publishableKey: 'pk_test_123', // required
     apiKey: 'sk_test_123' // required,
-    locale: string,
     apiVersion: string, // default 2022-11-15
   }
 })
