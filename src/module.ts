@@ -87,17 +87,9 @@ export default defineNuxtModule<ModuleOptions>({
       nitroConfig.alias['#stripe/server'] = resolveRuntimeModule('./server/services')
     })
 
-    addTemplate({
-      filename: 'types/stripe.d.ts',
-      getContents: () => [
-        'declare module \'#stripe/server\' {',
-        `  const useServerStripe: typeof import('${resolve('./runtime/server/services')}').useServerStripe`,
-        '}'
-      ].join('\n')
-    })
-
+    // TODO: add to nitro tsconfig instead when Nuxt v3.6 is released
     nuxt.hook('prepare:types', (options) => {
-      options.references.push({ path: resolve(nuxt.options.buildDir, 'types/stripe.d.ts') })
+      options.tsConfig.compilerOptions.paths['#stripe/server'] = [resolveRuntimeModule('./server/services')]
     })
   }
 })
