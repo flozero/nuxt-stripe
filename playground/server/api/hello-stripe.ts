@@ -6,6 +6,6 @@ export default defineEventHandler(async (event) => {
     console.log(stripe)
 
     return {
-        hello: "stripe"
+        hello: "stripe",
     }
 });

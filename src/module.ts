@@ -98,6 +98,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.hook('prepare:types', (options) => {
       options.references.push({ path: resolve(nuxt.options.buildDir, 'types/stripe.d.ts') })
+      options.tsConfig.compilerOptions.paths['#stripe/server'] = [resolveRuntimeModule('./server/services')]
     })
   }
 })
