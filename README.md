@@ -22,7 +22,7 @@ This instance can be used to interact with the Stripe API.
 
 #### Example
 ```ts
-import { defineEventHandler } from 'h3';
+import { defineEventHandler } from 'h3'
 import { useServerStripe } from '#stripe/server'
 
 export default defineEventHandler(async (event) => {
@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
   return {
     version: stripe.VERSION
   }
-});
+})
 ```
 
 ### Client-side usage
@@ -53,7 +53,7 @@ Use stripe inside pages or plugins
 
 <script setup lang="ts">
 // Import the function in your component or page
-import { useClientStripe } from '@nuxtjs/stripe';
+import { useClientStripe } from '@nuxtjs/stripe'
 
 // Call the function to get the Stripe instance
 const stripe = useClientStripe()
@@ -105,7 +105,7 @@ export default defineNuxtConfig({
     // Server
     apiKey: 'sk_test_123', // required
     apiVersion: '2022-11-15', // optional, default is '2022-11-15'
-    // client
+    // Client
     publishableKey: 'pk_test_123', // required
   }
 })

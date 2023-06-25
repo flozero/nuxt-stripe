@@ -1,6 +1,6 @@
 import Stripe from "stripe"
 import { useRuntimeConfig } from '#imports'
-import { H3Event } from 'h3';
+import { H3Event } from 'h3'
 
 /**
  * useServerStripe is a utility function that initializes and returns a Stripe instance

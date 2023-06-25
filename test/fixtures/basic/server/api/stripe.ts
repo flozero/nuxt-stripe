@@ -1,5 +1,5 @@
 import { useServerStripe } from '#stripe/server'
-import { defineEventHandler } from 'h3';
+import { defineEventHandler } from 'h3'
 
 export default defineEventHandler(async (event) => { 
     const stripe = await useServerStripe(event)
@@ -9,4 +9,4 @@ export default defineEventHandler(async (event) => {
         // @ts-ignore
         version: stripe.VERSION,
     }
-});
+})
