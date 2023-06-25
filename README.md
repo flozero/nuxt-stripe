@@ -1,4 +1,4 @@
-# Nuxt module for stripe
+# Nuxt module for Stripe
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -13,31 +13,40 @@ Nuxt module for application using stripe.
 
 ## Features
 
-At any time look at the playground for code examples.
+This Nuxt module provides an easy way to integrate Stripe in your Nuxt application, both on the client-side and server-side. It utilizes the official `stripe` package for server-side usage and @stripe/stripe-js for the client-side.
 
-As Stripe can only be used in a node env we had to use both `stripe` (ssr / server) and `@stripe/stripe-js` (frontend).
+### Server-side usage
 
-Use stripe inside the server folder. 
+The module provides a `useServerStripe` function to create a Stripe instance on the server-side.
+This instance can be used to interact with the Stripe API.
 
-``` server/api/hello-stripe.ts
+#### Example
+```ts
+import { defineEventHandler } from 'h3';
 import { useServerStripe } from '#stripe/server'
 
-export default defineEventHandler(async (event) => { 
-    const stripe = await useServerStripe(event)
+export default defineEventHandler(async (event) => {
+  const stripe = await useServerStripe(event)
+  console.info("Stripe instance:", stripe)
 
-    console.log(stripe)
-
-    return {
-        hello: "stripe"
-    }
+  return {
+    version: stripe.VERSION
+  }
 });
+
 ```
+
+### Client-side usage
+
+On the client-side, you can use the `useClientStripe` function to get a Stripe instance.
+This instance can be used in pages or plugins.
 
 Use stripe inside pages or plugins
 
-``` app.vue
+#### Example
+```vue
 <template>
-  <h1>Nuxt Stripe module playground!</h1>
+  <h1>Nuxt Stripe instance</h1>
   <div>
     {{ stripe }}
   </div>
@@ -46,13 +55,9 @@ Use stripe inside pages or plugins
 <script setup lang="ts">
 import { useClientStripe } from '#imports';
 
-const stripe = useClientStripe() // useClientStripe is doing exactly the same as the code below. We have added a composable for convenience
-const stripePlugin = useNuxtApp().$stripe
-
+const stripe = useClientStripe()
 </script>
-
 ```
-
 
 ## Quick Setup
 
@@ -71,29 +76,33 @@ npm install --save-dev @nuxtjs/stripe
 
 2. Add `@nuxtjs/stripe` to the `modules` section of `nuxt.config.ts`
 
-```js
+```ts
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/stripe'
   ],
-  stripe: { // both keys are required. Check typescript
+  stripe: {
+    apiKey: 'sk_test_123',
     publishableKey: 'pk_test_123',
-    apiKey: 'sk_test_123'
   }
 })
 ```
 
 ## Configuration
 
-``` nuxt.config.js
+You can configure the module by providing the necessary Stripe keys and an optional API version in your `nuxt.config.js` file:
+
+```ts
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/stripe'
   ],
-  stripe: { 
+  stripe: {
+    // Server
+    apiKey: 'sk_test_123', // required
+    apiVersion: '2022-11-15', // optional, default is '2022-11-15'
+    // client
     publishableKey: 'pk_test_123', // required
-    apiKey: 'sk_test_123' // required,
-    apiVersion: string, // default 2022-11-15
   }
 })
 ```
