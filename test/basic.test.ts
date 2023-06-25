@@ -1,9 +1,10 @@
+// https://vitest.dev/guide/debugging.html#vscode to debug tests
+
 import { describe, it, expect } from 'vitest';
 import { fileURLToPath } from 'node:url';
 import { setup, $fetch } from '@nuxt/test-utils';
-import stripe from './fixtures/basic/stripeConfig';
 
-// https://vitest.dev/guide/debugging.html#vscode to debug tests
+import stripe from './fixtures/basic/stripeConfig';
 
 describe('ssr', async () => {
   const rootDir = fileURLToPath(new URL('./fixtures/basic', import.meta.url))
@@ -26,6 +27,7 @@ describe('ssr', async () => {
     const response = await $fetch('/api/stripe', { method: 'GET' });
   
     expect(response.status).toBe(200);
+    expect(response.version).toBe("12.9.0");
   });
 
   it('validates ssr config', async () => {
