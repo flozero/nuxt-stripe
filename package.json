@@ -1,6 +1,6 @@
 {
   "name": "nuxt3-stripe",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Nuxt module for stripe",
   "repository": "https://github.com/fuentesloic/nuxt3-stripe",
   "license": "MIT",

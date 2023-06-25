@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.1.1
+
+[compare changes](https://github.com/fuentesloic/nuxt3-stripe/compare/v1.1.0...v1.1.1)
+
+
+### 🩹 Fixes
+
+  - Contributors in changelog ([f30914b](https://github.com/fuentesloic/nuxt3-stripe/commit/f30914b))
+
+### 🏡 Chore
+
+  - Package naming as no ownership in @nuxtjs ([81b710d](https://github.com/fuentesloic/nuxt3-stripe/commit/81b710d))
+
+### ❤️  Contributors
+
+- Loic Fuentes ([@fuentesloic](http://github.com/fuentesloic))
+
 ## v1.1.0
 
 
