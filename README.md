@@ -3,13 +3,11 @@
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![License][license-src]][license-href]
-[![Nuxt][nuxt-src]][nuxt-href]
 
 Nuxt module for application using stripe.
 
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
 - [🏀 Online playground](https://stackblitz.com/github/fuentesloic/nuxt3-stripe?file=playground%2Fapp.vue)
-<!-- - [📖 &nbsp;Documentation](https://example.com) -->
 
 ## Features
 
@@ -53,7 +51,7 @@ Use stripe inside pages or plugins
 
 <script setup lang="ts">
 // Import the function in your component or page
-import { useClientStripe } from '@nuxtjs/stripe'
+import { useClientStripe } from 'nuxt3-stripe'
 
 // Call the function to get the Stripe instance
 const stripe = useClientStripe()
@@ -65,25 +63,25 @@ const stripe = useClientStripe()
 
 ## Quick Setup
 
-1. Add `@nuxtjs/stripe` dependency to your project
+1. Add `nuxt3-stripe` dependency to your project
 
 ```bash
 # Using pnpm
-pnpm add -D @nuxtjs/stripe
+pnpm add -D nuxt3-stripe
 
 # Using yarn
-yarn add --dev @nuxtjs/stripe
+yarn add --dev nuxt3-stripe
 
 # Using npm
-npm install --save-dev @nuxtjs/stripe
+npm install --save-dev nuxt3-stripe
 ```
 
-2. Add `@nuxtjs/stripe` to the `modules` section of `nuxt.config.ts`
+2. Add `nuxt3-stripe` to the `modules` section of `nuxt.config.ts`
 
 ```ts
 export default defineNuxtConfig({
   modules: [
-    '@nuxtjs/stripe'
+    'nuxt3-stripe'
   ],
   stripe: {
     apiKey: 'sk_test_123',
@@ -99,7 +97,7 @@ You can configure the module by providing the necessary Stripe keys and an optio
 ```ts
 export default defineNuxtConfig({
   modules: [
-    '@nuxtjs/stripe'
+    'nuxt3-stripe'
   ],
   stripe: {
     // Server
@@ -148,14 +146,14 @@ npm run release
 ```
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/@nuxtjs/stripe/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-version-href]: https://npmjs.com/package/@nuxtjs/stripe
+[npm-version-src]: https://img.shields.io/npm/v/nuxt3-stripe/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-href]: https://npmjs.com/package/nuxt3-stripe
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/@nuxtjs/stripe.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-downloads-href]: https://npmjs.com/package/@nuxtjs/stripe
+[npm-downloads-src]: https://img.shields.io/npm/dm/nuxt3-stripe.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-downloads-href]: https://npmjs.com/package/nuxt3-stripe
 
-[license-src]: https://img.shields.io/npm/l/@nuxtjs/stripe.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://npmjs.com/package/@nuxtjs/stripe
+[license-src]: https://img.shields.io/npm/l/nuxt3-stripe.svg?style=flat&colorA=18181B&colorB=28CF8D
+[license-href]: https://npmjs.com/package/nuxt3-stripe
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
