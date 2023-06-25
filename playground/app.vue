@@ -21,10 +21,10 @@ stripeClient.value = useClientStripe()
 
 <style>
 html {
+  background-color: #222;
+  color: #eee;
   font-family: sans-serif;
   font-size: 1rem;
-  color: #eee;
-  background-color: #222;
   margin: 1rem;
 }
 
@@ -34,8 +34,9 @@ h1, h2  {
 
 section {
   background-color: #2f2d2d;
-  padding: 1.5rem;border-radius: 1rem;
-  white-space: pre-wrap;
+  border-radius: 1rem;
   font-family: monospace;
+  padding: 1.5rem;
+  white-space: pre-wrap;
 }
 </style>
