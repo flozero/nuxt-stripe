@@ -1,5 +1,5 @@
 <template>
-  <h1>Nuxt Stripe module playground!</h1>
+  <h1>Nuxt Stripe module test</h1>
   <div>
     {{ stripe }}
   </div>

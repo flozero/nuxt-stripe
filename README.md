@@ -113,27 +113,37 @@ export default defineNuxtConfig({
 
 ## Development
 
+Initial step: Clone this repository
+
 ```bash
 # Install dependencies
+yarn install 
 npm install
 
 # Generate type stubs
+yarn dev:prepare
 npm run dev:prepare
 
 # Develop with the playground
+yarn dev
 npm run dev
 
 # Build the playground
+yarn dev:build
 npm run dev:build
 
 # Run ESLint
+yarn lint
 npm run lint
 
 # Run Vitest
+yarn test
+yarn test:watch
 npm run test
 npm run test:watch
 
 # Release new version
+yarn release
 npm run release
 ```
 

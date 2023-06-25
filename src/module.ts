@@ -87,7 +87,6 @@ export default defineNuxtModule<ModuleOptions>({
       nitroConfig.alias['#stripe/server'] = resolveRuntimeModule('./server/services')
     })
 
-    // TODO: add to nitro tsconfig instead when Nuxt v3.6 is released
     nuxt.hook('prepare:types', (options) => {
       options.tsConfig.compilerOptions.paths['#stripe/server'] = [resolveRuntimeModule('./server/services')]
     })
