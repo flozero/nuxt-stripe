@@ -145,6 +145,13 @@ yarn release
 npm run release
 ```
 
+## Nuxt 2
+
+Disclaimer: Nuxt 2 end-of-life is plan for 31st Dec, 2023.
+The following is only for nuxt 2:
+[nuxt2-stripe](https://github.com/WilliamDASILVA/nuxt-stripe-module)
+[latest release](https://github.com/WilliamDASILVA/nuxt-stripe-module/releases/tag/3.0.0)
+
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/nuxt3-stripe/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-version-href]: https://npmjs.com/package/nuxt3-stripe
