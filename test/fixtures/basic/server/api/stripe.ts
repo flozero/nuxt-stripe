@@ -5,6 +5,6 @@ export default defineEventHandler(async (event) => {
     const stripe = await useServerStripe(event)
 
     return {
-        api: stripe.PACKAGE_VERSION
+        version: stripe.VERSION
     }
 });
