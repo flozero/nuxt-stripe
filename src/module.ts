@@ -1,4 +1,4 @@
-import { defineNuxtModule, addPlugin, createResolver, addTemplate, resolveModule } from '@nuxt/kit'
+import { defineNuxtModule, addPlugin, createResolver, resolveModule } from '@nuxt/kit'
 import defu from 'defu'
 import { fileURLToPath } from 'url'
 
@@ -58,12 +58,12 @@ export default defineNuxtModule<ModuleOptions>({
     // Public runtimeConfig
     nuxt.options.runtimeConfig.public.stripe = defu(nuxt.options.runtimeConfig.public.stripe, {
       publishableKey: options.publishableKey,
-      apiVersion: options.apiVersion
     })
 
     // Private runtimeConfig
-      nuxt.options.runtimeConfig.stripe = defu(nuxt.options.runtimeConfig.stripe, {
-      apiKey: options.apiKey
+    nuxt.options.runtimeConfig.stripe = defu(nuxt.options.runtimeConfig.stripe, {
+      apiKey: options.apiKey,
+      apiVersion: options.apiVersion
     })
 
     // Transpile runtime
@@ -87,7 +87,6 @@ export default defineNuxtModule<ModuleOptions>({
       nitroConfig.alias['#stripe/server'] = resolveRuntimeModule('./server/services')
     })
 
-    // TODO: add to nitro tsconfig instead when Nuxt v3.6 is released
     nuxt.hook('prepare:types', (options) => {
       options.tsConfig.compilerOptions.paths['#stripe/server'] = [resolveRuntimeModule('./server/services')]
     })

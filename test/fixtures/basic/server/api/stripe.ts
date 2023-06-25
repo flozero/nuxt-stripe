@@ -1,11 +1,12 @@
 import { useServerStripe } from '#stripe/server'
+import { defineEventHandler } from 'h3'
 
 export default defineEventHandler(async (event) => { 
     const stripe = await useServerStripe(event)
 
-    console.log(stripe)
-
     return {
-        hello: "stripe",
+        status: 200,
+        // @ts-ignore
+        version: stripe.VERSION,
     }
-});
+})
