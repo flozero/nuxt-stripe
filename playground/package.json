@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@nuxtjs/stripe-playground",
+  "name": "nuxt3-stripe-playground",
   "type": "module",
   "scripts": {
     "dev": "nuxi dev",

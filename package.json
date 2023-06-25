@@ -1,5 +1,5 @@
 {
-  "name": "@nuxtjs/stripe",
+  "name": "nuxt3-stripe",
   "version": "1.0.0",
   "description": "Nuxt module for stripe",
   "repository": "https://github.com/fuentesloic/nuxt3-stripe",
