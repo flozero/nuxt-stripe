@@ -33,7 +33,6 @@ export default defineEventHandler(async (event) => {
     version: stripe.VERSION
   }
 });
-
 ```
 
 ### Client-side usage
@@ -53,9 +52,14 @@ Use stripe inside pages or plugins
 </template>
 
 <script setup lang="ts">
-import { useClientStripe } from '#imports';
+// Import the function in your component or page
+import { useClientStripe } from '@nuxtjs/stripe';
 
+// Call the function to get the Stripe instance
 const stripe = useClientStripe()
+
+// Use the Stripe instance to interact with the stripe.js library
+// stripe.redirectToCheckout(...)
 </script>
 ```
 
