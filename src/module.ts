@@ -37,8 +37,8 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   defaults: {
-      publishableKey: null,
-      apiKey: null,
+      publishableKey: process.env.STRIPE_PUBLISHABLE_KEY as string,
+      apiKey: process.env.STRIPE_API_KEY as string,
       apiVersion: '2022-11-15'
   },
   setup (options, nuxt) {
