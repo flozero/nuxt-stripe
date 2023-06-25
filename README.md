@@ -83,16 +83,20 @@ export default defineNuxtConfig({
   modules: [
     'nuxt3-stripe'
   ],
-  stripe: {
-    apiKey: 'sk_test_123',
-    publishableKey: 'pk_test_123',
-  }
 })
 ```
 
 ## Configuration
 
-You can configure the module by providing the necessary Stripe keys and an optional API version in your `nuxt.config.js` file:
+Stripe keys can be added to the `.env` file...
+
+```env
+STRIPE_PUBLISHABLE_KEY="pk_live_..."
+STRIPE_API_KEY="sk_live_..."
+```
+
+...or to the Nuxt configuration file:
+
 
 ```ts
 export default defineNuxtConfig({
@@ -108,6 +112,8 @@ export default defineNuxtConfig({
   }
 })
 ```
+
+> We highly recommend you put your **production** keys in your `.env` file to avoid committing them
 
 ## Development
 
