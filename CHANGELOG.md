@@ -38,7 +38,5 @@
 ### ❤️  Contributors
 
 - Loic Fuentes ([@fuentesloic](http://github.com/fuentesloic))
-- Daniel Roe <daniel@roe.dev>
-- Loïc Fuentes ([@fuentesloic](http://github.com/fuentesloic))
-- Giraud Florent <florent giraud>
-
+- Florent Giraud ([@flozero](https://github.com/flozero))
+- Daniel Roe ([@danielroe](https://github.com/danielroe))
