@@ -11,7 +11,7 @@ Nuxt module for application using stripe.
 
 ## Features
 
-This Nuxt module provides an easy way to integrate Stripe in your Nuxt application, both on the client-side and server-side. It utilizes the official `stripe` package for server-side usage and @stripe/stripe-js for the client-side.
+This Nuxt module provides an easy way to integrate Stripe in your Nuxt application, both on the client-side and server-side. It utilizes the official [stripe](https://www.npmjs.com/package/stripe) package for server-side usage and [@stripe/stripe-js](https://www.npmjs.com/package/@stripe/stripe-js) for the client-side.
 
 ### Server-side usage
 
@@ -121,7 +121,7 @@ Initial step: Clone this repository
 
 ```bash
 # Install dependencies
-yarn install 
+yarn install
 npm install
 
 # Generate type stubs
@@ -155,7 +155,7 @@ npm run release
 
 Disclaimer! Nuxt 2's end-of-life is planned for 31st Dec, 2023.
 The following stripe module is only for **nuxt 2** purpose and does **not** cover server side:
-- [nuxt2-stripe](https://github.com/WilliamDASILVA/nuxt-stripe-module)
+- [nuxt2-stripe - doc](https://github.com/WilliamDASILVA/nuxt-stripe-module)
 - [nuxt2-stripe - latest release](https://github.com/WilliamDASILVA/nuxt-stripe-module/releases/tag/3.0.0)
 
 <!-- Badges -->
