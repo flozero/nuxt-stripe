@@ -7,11 +7,11 @@
 Nuxt module for application using stripe.
 
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
-- [🏀 Online playground](https://stackblitz.com/github/fuentesloic/nuxt3-stripe?file=playground%2Fapp.vue)
+- [🏀 Online playground](https://stackblitz.com/github/fuentesloic/nuxt-stripe?file=playground%2Fapp.vue)
 
 ## Features
 
-This Nuxt module provides an easy way to integrate Stripe in your Nuxt application, both on the client-side and server-side. It utilizes the official `stripe` package for server-side usage and @stripe/stripe-js for the client-side.
+This Nuxt module provides an easy way to integrate Stripe in your Nuxt application, both on the client-side and server-side. It utilizes the official [stripe](https://www.npmjs.com/package/stripe) package for server-side usage and [@stripe/stripe-js](https://www.npmjs.com/package/@stripe/stripe-js) for the client-side.
 
 ### Server-side usage
 
@@ -51,7 +51,7 @@ Use stripe inside pages or plugins
 
 <script setup lang="ts">
 // Import the function in your component or page
-import { useClientStripe } from 'nuxt3-stripe'
+import { useClientStripe } from '@unlok-co/nuxt-stripe'
 
 // Call the function to get the Stripe instance
 const stripe = useClientStripe()
@@ -63,25 +63,25 @@ const stripe = useClientStripe()
 
 ## Quick Setup
 
-1. Add `nuxt3-stripe` dependency to your project
+1. Add `@unlok-co/nuxt-stripe` dependency to your project
 
 ```bash
 # Using pnpm
-pnpm add -D nuxt3-stripe
+pnpm add -D @unlok-co/nuxt-stripe
 
 # Using yarn
-yarn add --dev nuxt3-stripe
+yarn add --dev @unlok-co/nuxt-stripe
 
 # Using npm
-npm install --save-dev nuxt3-stripe
+npm install --save-dev @unlok-co/nuxt-stripe
 ```
 
-2. Add `nuxt3-stripe` to the `modules` section of `nuxt.config.ts`
+2. Add `@unlok-co/nuxt-stripe` to the `modules` section of `nuxt.config.ts`
 
 ```ts
 export default defineNuxtConfig({
   modules: [
-    'nuxt3-stripe'
+    '@unlok-co/nuxt-stripe'
   ],
 })
 ```
@@ -101,7 +101,7 @@ STRIPE_API_KEY="sk_live_..."
 ```ts
 export default defineNuxtConfig({
   modules: [
-    'nuxt3-stripe'
+    '@unlok-co/nuxt-stripe'
   ],
   stripe: {
     // Server
@@ -121,7 +121,7 @@ Initial step: Clone this repository
 
 ```bash
 # Install dependencies
-yarn install 
+yarn install
 npm install
 
 # Generate type stubs
@@ -155,18 +155,18 @@ npm run release
 
 Disclaimer! Nuxt 2's end-of-life is planned for 31st Dec, 2023.
 The following stripe module is only for **nuxt 2** purpose and does **not** cover server side:
-- [nuxt2-stripe](https://github.com/WilliamDASILVA/nuxt-stripe-module)
+- [nuxt2-stripe - doc](https://github.com/WilliamDASILVA/nuxt-stripe-module)
 - [nuxt2-stripe - latest release](https://github.com/WilliamDASILVA/nuxt-stripe-module/releases/tag/3.0.0)
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/nuxt3-stripe/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-version-href]: https://npmjs.com/package/nuxt3-stripe
+[npm-version-src]: https://img.shields.io/npm/v/@unlok-co/nuxt-stripe/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-version-href]: https://npmjs.com/package/@unlok-co/nuxt-stripe
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/nuxt3-stripe.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-downloads-href]: https://npmjs.com/package/nuxt3-stripe
+[npm-downloads-src]: https://img.shields.io/npm/dm/@unlok-co/nuxt-stripe.svg?style=flat&colorA=18181B&colorB=28CF8D
+[npm-downloads-href]: https://npmjs.com/package/@unlok-co/nuxt-stripe
 
-[license-src]: https://img.shields.io/npm/l/nuxt3-stripe.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://npmjs.com/package/nuxt3-stripe
+[license-src]: https://img.shields.io/npm/l/@unlok-co/nuxt-stripe.svg?style=flat&colorA=18181B&colorB=28CF8D
+[license-href]: https://npmjs.com/package/@unlok-co/nuxt-stripe
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com

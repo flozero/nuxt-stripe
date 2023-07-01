@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1>Nuxt 3 - Stripe module playground</h1>
+    <h1>Nuxt - Stripe module playground</h1>
     <section>
       <h2>Stripe client</h2>
       <code>

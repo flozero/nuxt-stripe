@@ -30,7 +30,7 @@ export interface ModuleOptions {
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'nuxt3-stripe',
+    name: '@unlok-co/nuxt-stripe',
     configKey: 'stripe',
     compatibility: {
       nuxt: '^3.0.0'
