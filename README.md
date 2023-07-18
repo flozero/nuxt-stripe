@@ -88,11 +88,11 @@ export default defineNuxtConfig({
 
 ## Configuration
 
-Stripe keys can be added to the `.env` file...
+Stripe keys can be added at runtime via `.env` file...
 
 ```env
-STRIPE_PUBLISHABLE_KEY="pk_live_..."
-STRIPE_API_KEY="sk_live_..."
+NUXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_live_..."
+NUXT_STRIPE_API_KEY="sk_live_..."
 ```
 
 ...or to the Nuxt configuration file:
