@@ -45,16 +45,6 @@ export default defineNuxtModule<ModuleOptions>({
     const { resolve } = createResolver(import.meta.url)
     const resolveRuntimeModule = (path: string) => resolveModule(path, { paths: resolve('./runtime') })
 
-    // Make sure the client key is set
-    if (!options.publishableKey) {
-      throw new Error('Missing publishableKey option')
-    }
-
-    // Make sure the server key is set
-    if (!options.apiKey) {
-      throw new Error('Missing apiKey option')
-    }
-
     // Public runtimeConfig
     nuxt.options.runtimeConfig.public.stripe = defu(nuxt.options.runtimeConfig.public.stripe, {
       publishableKey: options.publishableKey,
