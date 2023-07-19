@@ -9,5 +9,13 @@ import { useNuxtApp } from "#imports"
  */
 
 export default function useClientStripe() {
+  const { public: { stripe: { publishableKey } } } = useRuntimeConfig()
+
+  if (!publishableKey) {
+    throw new Error('Missing publishableKey option.')
+  } else {
+    console.info('Stripe publishableKey loaded successfully.');
+  }
+
   return useNuxtApp().$stripe
 }
