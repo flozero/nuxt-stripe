@@ -11,6 +11,7 @@ import { useNuxtApp } from "#imports"
 export default function useClientStripe() {
   const { public: { stripe: { publishableKey } } } = useRuntimeConfig()
 
+  // Check status publishableKey
   if (!publishableKey) {
     throw new Error('Missing publishableKey option.')
   } else {
