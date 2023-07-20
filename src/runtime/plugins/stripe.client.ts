@@ -10,6 +10,10 @@ import { loadStripe } from '@stripe/stripe-js'
  */
 
 export default defineNuxtPlugin(async(nuxtApp) => {
+  if (!nuxtApp.$config.public.stripe.publishableKey) {
+    throw new Error('Missing publishableKey option.')
+  }
+  
   const stripe = await loadStripe(nuxtApp.$config.public.stripe.publishableKey)
 
   return {
