@@ -13,11 +13,8 @@ import { H3Event } from 'h3'
 export const useServerStripe = async(event: H3Event): Promise<Stripe> => {
   const {stripe: { apiKey, apiVersion }} = useRuntimeConfig()
 
-  // Check status apiKey
   if (!apiKey) {
     throw new Error('Missing apiKey option.')
-  } else {
-    console.info('Stripe apiKey loaded successfully.');
   }
 
   // Return Stripe's instance if already initialized in event context
