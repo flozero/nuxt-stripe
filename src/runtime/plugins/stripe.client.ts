@@ -14,7 +14,6 @@ let stripe: Stripe = null
 export default defineNuxtPlugin(async(nuxtApp) => {
   
   async function _loadStripe() {
-    console.log("je suis la", nuxtApp.$config)
     if (stripe){
       return stripe
     }
