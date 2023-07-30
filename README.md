@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
 ### Client-side usage
 
 On the client-side, you can use the `useClientStripe` function to get a Stripe instance.
-This instance can be used in pages or plugins.
+This instance can be used in pages or plugins. This will be null on server side.
 
 Use stripe inside pages or plugins
 
@@ -54,7 +54,7 @@ Use stripe inside pages or plugins
 import { useClientStripe } from '@unlok-co/nuxt-stripe'
 
 // Call the function to get the Stripe instance
-const stripe = useClientStripe()
+const stripe = await useClientStripe()
 
 // Use the Stripe instance to interact with the stripe.js library
 // stripe.redirectToCheckout(...)
@@ -88,16 +88,6 @@ export default defineNuxtConfig({
 
 ## Configuration
 
-Stripe keys can be added to the `.env` file...
-
-```env
-STRIPE_PUBLISHABLE_KEY="pk_live_..."
-STRIPE_API_KEY="sk_live_..."
-```
-
-...or to the Nuxt configuration file:
-
-
 ```ts
 export default defineNuxtConfig({
   modules: [
@@ -105,10 +95,21 @@ export default defineNuxtConfig({
   ],
   stripe: {
     // Server
-    apiKey: 'sk_test_123', // required
-    apiVersion: '2022-11-15', // optional, default is '2022-11-15'
-    // Client
-    publishableKey: 'pk_test_123', // required
+    server: {
+      key: 'sk_test_123',
+      options: {
+        // your api options override for stripe server side
+        apiVersion: '2022-11-15', // optional, default is '2022-11-15'
+      }
+    // CLIENT
+    },
+    client: {
+      key: 'pk_test_123',
+      // your api options override for stripe client side
+      options: {
+
+      }
+    }
   }
 })
 ```

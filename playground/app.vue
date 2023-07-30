@@ -3,20 +3,20 @@
     <h1>Nuxt - Stripe module playground</h1>
     <section>
       <h2>Stripe client</h2>
-      <code>
-        {{ stripeClient ? stripeClient : 'Loading...' }}
-      </code>
+      <client-only>
+        <code>
+          {{ stripeClient ? stripeClient : 'Loading...' }}
+        </code>
+      </client-only>
     </section>
+    <OtherComponent />
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useClientStripe } from '#imports'
-import { Stripe } from '@stripe/stripe-js'
 
-const stripeClient = ref<Stripe | null>(null)
-stripeClient.value = useClientStripe()
+const stripeClient = await useClientStripe()
 </script>
 
 <style>

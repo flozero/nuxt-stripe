@@ -7,7 +7,7 @@ import { useNuxtApp } from "#imports"
  * It can be used in components or pages to interact with the Stripe.js library.
  * 
  */
-
 export default function useClientStripe() {
-  return useNuxtApp().$stripe
+  if (process.server) return null
+  return useNuxtApp().$stripe()
 }
