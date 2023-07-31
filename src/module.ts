@@ -2,6 +2,7 @@ import { defineNuxtModule, createResolver, resolveModule } from '@nuxt/kit'
 import defu from 'defu'
 import { fileURLToPath } from 'url'
 import { Stripe } from 'stripe'
+import type { StripeConstructorOptions } from '@stripe/stripe-js'
 
 export interface ModuleOptions {
   /**
@@ -21,6 +22,12 @@ export interface ModuleOptions {
   apiKey: string | null,
 
   /**
+   * Stripe config options for client side only
+   * @docs https://stripe.com/docs/js/initializing
+   */
+  clientConfig?: StripeConstructorOptions,
+
+  /**
    * Stripe config options for server side only
    * @docs https://github.com/stripe/stripe-node#configuration
    */
@@ -38,6 +45,9 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
       publishableKey: '' as string,
       apiKey: '' as string,
+      clientConfig: {
+        apiVersion: '2022-11-15' as Stripe.LatestApiVersion
+      },
       serverConfig: {
         apiVersion: '2022-11-15' as Stripe.LatestApiVersion
       }
@@ -49,6 +59,7 @@ export default defineNuxtModule<ModuleOptions>({
     // Public runtimeConfig
     nuxt.options.runtimeConfig.public.stripe = defu(nuxt.options.runtimeConfig.public.stripe, {
       publishableKey: options.publishableKey,
+      clientConfig: options.clientConfig
     })
 
     // Private runtimeConfig

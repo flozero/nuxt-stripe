@@ -10,12 +10,12 @@ import { useRuntimeConfig } from '#imports'
  */
 
 export default function useClientStripe() {
-  const { public: {stripe: { publishableKey }} } = useRuntimeConfig()
+  const { public: {stripe: { publishableKey, clientConfig }} } = useRuntimeConfig()
 
   if (!publishableKey) {
     throw new Error('Missing publishableKey option.')
   }
 
-  const stripe = loadStripe(publishableKey)
+  const stripe = loadStripe(publishableKey, clientConfig)
   return stripe
 }

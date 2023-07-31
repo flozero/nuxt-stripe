@@ -19,6 +19,7 @@ describe('ssr', async () => {
     const html = await $fetch('/')
 
     expect(html).toContain(`publishableKey:"${stripe.publishableKey}"`)
+    expect(html).toContain(`apiVersion:"${stripe.clientConfig.apiVersion}"`)
     expect(html).not.toContain(`apiKey:"${stripe.apiKey}"`)
     expect(html).not.toContain(`apiVersion:"${stripe.serverConfig.apiVersion}"`)
   })
