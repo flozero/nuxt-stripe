@@ -1,6 +1,7 @@
 import { defineNuxtModule, createResolver, resolveModule } from '@nuxt/kit'
 import defu from 'defu'
 import { fileURLToPath } from 'url'
+import { Stripe } from 'stripe'
 
 export interface ModuleOptions {
   /**
@@ -20,12 +21,10 @@ export interface ModuleOptions {
   apiKey: string | null,
 
   /**
-   * Stripe api version for server side only
-   * @example '2022-11-15'
-   * @type string | '2022-11-15'
-   * @docs https://stripe.com/docs/api/versioning
+   * Stripe config options for server side only
+   * @docs https://github.com/stripe/stripe-node#configuration
    */
-  apiVersion: string | '2022-11-15'
+  serverConfig?: Stripe.StripeConfig
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -39,7 +38,9 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
       publishableKey: '' as string,
       apiKey: '' as string,
-      apiVersion: '2022-11-15'
+      serverConfig: {
+        apiVersion: '2022-11-15' as Stripe.LatestApiVersion
+      }
   },
   setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
@@ -53,7 +54,7 @@ export default defineNuxtModule<ModuleOptions>({
     // Private runtimeConfig
     nuxt.options.runtimeConfig.stripe = defu(nuxt.options.runtimeConfig.stripe, {
       apiKey: options.apiKey,
-      apiVersion: options.apiVersion
+      serverConfig: options.serverConfig
     })
 
     // Transpile runtime
