@@ -101,12 +101,16 @@ export default defineNuxtConfig({
   stripe: {
     // Server
     apiKey: 'sk_test_123', // required
-    apiVersion: '2022-11-15', // optional, default is '2022-11-15'
+    serverConfig: {
+      apiVersion: '2022-11-15', // optional, default is '2022-11-15'
+    }
     // Client
     publishableKey: 'pk_test_123', // required
   }
 })
 ```
+
+For all available `serverConfig` options take a look at the [official repo README](https://github.com/stripe/stripe-node#configuration).
 
 > We highly recommend you put your **production** keys in your `.env` file to avoid committing them
 
