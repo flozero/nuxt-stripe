@@ -11,12 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useClientStripe } from '#imports'
-import { Stripe } from '@stripe/stripe-js'
 
-const stripeClient = ref<Stripe | null>(null)
-stripeClient.value = useClientStripe()
+const stripeClient = await useClientStripe()
 </script>
 
 <style>

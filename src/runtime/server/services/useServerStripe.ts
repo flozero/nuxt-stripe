@@ -11,7 +11,11 @@ import { H3Event } from 'h3'
  * @return {Promise<Stripe>} - A Promise that resolves to the Stripe server instance for the event context
  */
 export const useServerStripe = async(event: H3Event): Promise<Stripe> => {
-  const {stripe: { apiKey, apiVersion }} = useRuntimeConfig()
+  const {stripe: { apiKey, serverConfig }} = useRuntimeConfig()
+
+  if (!apiKey) {
+    throw new Error('Missing apiKey option.')
+  }
 
   // Return Stripe's instance if already initialized in event context
   if ( event.context._stripe ) return event.context._stripe
@@ -20,7 +24,7 @@ export const useServerStripe = async(event: H3Event): Promise<Stripe> => {
   // We are safely ignoring this error by using @ts-ignore directive
   // @docs — https://stripe.com/docs/api/versioning
   // @ts-ignore
-  const stripe = new Stripe(apiKey, { apiVersion })
+  const stripe = new Stripe(apiKey, serverConfig)
 
   // Store the initialized Stripe instance in the event context for future use
   event.context._stripe = stripe

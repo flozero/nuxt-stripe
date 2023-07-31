@@ -1,6 +1,8 @@
-import { defineNuxtModule, addPlugin, createResolver, resolveModule } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, resolveModule } from '@nuxt/kit'
 import defu from 'defu'
 import { fileURLToPath } from 'url'
+import { Stripe } from 'stripe'
+import type { StripeConstructorOptions } from '@stripe/stripe-js'
 
 export interface ModuleOptions {
   /**
@@ -20,12 +22,16 @@ export interface ModuleOptions {
   apiKey: string | null,
 
   /**
-   * Stripe api version for server side only
-   * @example '2022-11-15'
-   * @type string | '2022-11-15'
-   * @docs https://stripe.com/docs/api/versioning
+   * Stripe config options for client side only
+   * @docs https://stripe.com/docs/js/initializing
    */
-  apiVersion: string | '2022-11-15'
+  clientConfig?: StripeConstructorOptions,
+
+  /**
+   * Stripe config options for server side only
+   * @docs https://github.com/stripe/stripe-node#configuration
+   */
+  serverConfig?: Stripe.StripeConfig
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -37,41 +43,34 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   defaults: {
-      publishableKey: process.env.STRIPE_PUBLISHABLE_KEY as string,
-      apiKey: process.env.STRIPE_API_KEY as string,
-      apiVersion: '2022-11-15'
+      publishableKey: '' as string,
+      apiKey: '' as string,
+      clientConfig: {
+        apiVersion: '2022-11-15' as Stripe.LatestApiVersion
+      },
+      serverConfig: {
+        apiVersion: '2022-11-15' as Stripe.LatestApiVersion
+      }
   },
   setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
     const resolveRuntimeModule = (path: string) => resolveModule(path, { paths: resolve('./runtime') })
 
-    // Make sure the client key is set
-    if (!options.publishableKey) {
-      throw new Error('Missing publishableKey option')
-    }
-
-    // Make sure the server key is set
-    if (!options.apiKey) {
-      throw new Error('Missing apiKey option')
-    }
-
     // Public runtimeConfig
     nuxt.options.runtimeConfig.public.stripe = defu(nuxt.options.runtimeConfig.public.stripe, {
       publishableKey: options.publishableKey,
+      clientConfig: options.clientConfig
     })
 
     // Private runtimeConfig
     nuxt.options.runtimeConfig.stripe = defu(nuxt.options.runtimeConfig.stripe, {
       apiKey: options.apiKey,
-      apiVersion: options.apiVersion
+      serverConfig: options.serverConfig
     })
 
     // Transpile runtime
     const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
     nuxt.options.build.transpile.push(runtimeDir)
-
-    // Add runtime plugins
-    addPlugin(resolve(runtimeDir, 'plugins', 'stripe.client'))
 
     nuxt.hook('imports:dirs', (dirs) => {
       dirs.push(resolve(runtimeDir, 'composables'))
