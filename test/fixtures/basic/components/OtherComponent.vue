@@ -1,12 +1,12 @@
 <template>
   <div>Other component using stripe</div>
   <section>
-      <h2>Stripe client</h2>
-      <client-only>
-        <code>
-          {{ stripeClient ? stripeClient : 'Loading...' }}
-        </code>
-      </client-only>
+    <h2>Stripe client</h2>
+    <client-only>
+      <code>
+        {{ stripeClient ? stripeClient : 'Loading...' }}
+      </code>
+    </client-only>
   </section>
 </template>
 

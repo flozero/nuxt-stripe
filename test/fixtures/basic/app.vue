@@ -1,10 +1,10 @@
 <template>
   <h1>Nuxt Stripe module test</h1>
   <client-only>
-        <code>
-          {{ stripeClient ? stripeClient : 'Loading...' }}
-        </code>
-    </client-only>
+    <code>
+      {{ stripeClient ? stripeClient : 'Loading...' }}
+    </code>
+  </client-only>
   <OtherComponent />
 </template>
 

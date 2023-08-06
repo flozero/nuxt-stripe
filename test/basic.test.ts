@@ -1,6 +1,6 @@
 // https://vitest.dev/guide/debugging.html#vscode to debug tests
 
-import { describe, it, expect, vi, afterAll } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { fileURLToPath } from 'node:url'
 import { setup, $fetch } from '@nuxt/test-utils'
 
