@@ -36,24 +36,19 @@ export default defineEventHandler(async (event) => {
 ### Client-side usage
 
 On the client-side, you can use the `useClientStripe` function to get a Stripe instance.
-This instance can be used in pages or plugins. This will be null on server side.
-
-Use stripe inside pages or plugins
+This composable is a wrap around the [`loadStripe`](https://github.com/stripe/stripe-js#loadstripe) and can be used in pages or plugins.
 
 #### Example
 ```vue
 <template>
   <h1>Nuxt Stripe instance</h1>
   <div>
-    {{ stripe }}
+    {{ stripe ? stripe : 'Loading...'}}
   </div>
 </template>
 
 <script setup lang="ts">
-// Import the function in your component or page
-import { useClientStripe } from '@unlok-co/nuxt-stripe'
-
-// Call the function to get the Stripe instance
+// Call the composable to get the Stripe instance
 const stripe = await useClientStripe()
 
 // Use the Stripe instance to interact with the stripe.js library
@@ -113,6 +108,8 @@ export default defineNuxtConfig({
   }
 })
 ```
+
+For all available `serverConfig` options take a look at the [official repo README](https://github.com/stripe/stripe-node#configuration). While for the `clientConfig` options take a look at the [official docs](https://stripe.com/docs/js/initializing#init_stripe_js-options).
 
 > We highly recommend you put your **production** keys in your `.env` file to avoid committing them
 

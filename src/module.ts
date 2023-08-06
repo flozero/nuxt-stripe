@@ -1,4 +1,4 @@
-import { defineNuxtModule, addPlugin, createResolver } from '@nuxt/kit'
+import { defineNuxtModule, createResolver } from '@nuxt/kit'
 import { StripeConstructorOptions } from '@stripe/stripe-js/types/stripe-js'
 import defu from 'defu'
 import Stripe from 'stripe'
@@ -51,9 +51,6 @@ export default defineNuxtModule<ModuleOptions>({
     // Transpile runtime
     const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
     nuxt.options.build.transpile.push(runtimeDir)
-
-    // Add runtime plugins
-    addPlugin(resolve(runtimeDir, 'plugins', 'stripe.client'))
 
     nuxt.hook('imports:dirs', (dirs) => {
       dirs.push(resolve(runtimeDir, 'composables'))
