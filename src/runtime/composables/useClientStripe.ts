@@ -1,4 +1,4 @@
-import { onBeforeMount, useNuxtApp, useState } from "#imports"
+import { onMounted, useNuxtApp, useState } from "#imports"
 import { Stripe } from '@stripe/stripe-js'
 /**
  * useClientStripe function
@@ -12,7 +12,7 @@ export default async function useClientStripe() {
   const stripe = useState<Stripe>('stripe-client', () => null)
   const isLoading = useState('stripe-client-loading', () => false)
 
-  onBeforeMount(async () => {
+  onMounted(async () => {
     if (!isLoading.value) {
       isLoading.value = true
       const _stripe = await nuxtApp.$stripe._loadStripe()
