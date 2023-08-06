@@ -3,11 +3,9 @@
     <h1>Nuxt - Stripe module playground</h1>
     <section>
       <h2>Stripe client</h2>
-      <client-only>
-        <code>
-          {{ stripeClient ? stripeClient : 'Loading...' }}
-        </code>
-      </client-only>
+      <code>
+        {{ stripeClient ? stripeClient : 'Loading...' }}
+      </code>
     </section>
     <OtherComponent />
   </main>

@@ -10,7 +10,7 @@ export interface ServerStripeOptions {
 } 
 
 export interface ClientStripeOptions  {
-  key?: string | null; 
+  key?: string | null;
   options?: StripeConstructorOptions;
 }
 

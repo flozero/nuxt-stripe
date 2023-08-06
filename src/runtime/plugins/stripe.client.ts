@@ -29,7 +29,9 @@ export default defineNuxtPlugin(async(nuxtApp) => {
   
   return {
     provide: {
-      stripe: _loadStripe,
+      stripe: {
+        _loadStripe
+      },
     }
   }
 })
