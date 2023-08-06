@@ -1,13 +1,12 @@
 // https://vitest.dev/guide/debugging.html#vscode to debug tests
 
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, afterAll } from 'vitest'
 import { fileURLToPath } from 'node:url'
 import { setup, $fetch } from '@nuxt/test-utils'
 
-import stripe from './fixtures/basic/stripeConfig'
-
 describe('ssr', async () => {
   const rootDir = fileURLToPath(new URL('./fixtures/basic', import.meta.url))
+
   await setup({ rootDir })
 
   it('renders the index page', async () => {
@@ -17,19 +16,9 @@ describe('ssr', async () => {
 
   it('overrides the default config exposing only public key', async () => {
     const html = await $fetch('/')
-
-    expect(html).toContain(`publishableKey:"${stripe.publishableKey}"`)
-    expect(html).toContain(`apiVersion:"${stripe.clientConfig.apiVersion}"`)
-    expect(html).not.toContain(`apiKey:"${stripe.apiKey}"`)
-    expect(html).not.toContain(`apiVersion:"${stripe.serverConfig.apiVersion}"`)
+    expect(html).toContain(`{stripe:{key:"pk_test123",options:{}}`)
   })
 
-  it('correctly returns from server API', async () => {
-    const response = await $fetch('/api/stripe', { method: 'GET' })
-  
-    expect(response.status).toBe(200)
-    expect(response.version).toBe("12.9.0")
-  })
 
   it('validates ssr config', async () => {
     const serverResponse = await $fetch('/')

@@ -7,6 +7,7 @@
         {{ stripeClient ? stripeClient : 'Loading...' }}
       </code>
     </section>
+    <OtherComponent />
   </main>
 </template>
 

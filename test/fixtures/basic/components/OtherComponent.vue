@@ -1,15 +1,16 @@
 <template>
-  <h1>Nuxt Stripe module test</h1>
-  <client-only>
+  <div>Other component using stripe</div>
+  <section>
+      <h2>Stripe client</h2>
+      <client-only>
         <code>
           {{ stripeClient ? stripeClient : 'Loading...' }}
         </code>
-    </client-only>
-  <OtherComponent />
+      </client-only>
+  </section>
 </template>
 
 <script setup lang="ts">
 import { useClientStripe } from '#imports'
-
 const stripeClient = await useClientStripe()
 </script>

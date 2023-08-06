@@ -1,6 +1,5 @@
-import { loadStripe } from '@stripe/stripe-js'
-import { useRuntimeConfig } from '#imports'
-
+import { onMounted, useNuxtApp, useState } from "#imports"
+import { Stripe, loadStripe } from '@stripe/stripe-js'
 /**
  * useClientStripe function
  *
@@ -8,14 +7,33 @@ import { useRuntimeConfig } from '#imports'
  * It can be used in components or pages to interact with the Stripe.js library.
  *
  */
+export default async function useClientStripe() {
+  const nuxtApp = useNuxtApp()
+  const stripe = useState<Stripe>('stripe-client', () => null)
+  const isLoading = useState('stripe-client-loading', () => false)
 
-export default function useClientStripe() {
-  const { public: {stripe: { publishableKey, clientConfig }} } = useRuntimeConfig()
+  async function _loadStripe() {
+    if (stripe.value){
+      return stripe.value
+    }
 
-  if (!publishableKey) {
-    throw new Error('Missing publishableKey option.')
+    isLoading.value = true
+
+    if (!nuxtApp.$config.public.stripe.key) console.warn("no key given for client service")
+
+    return await loadStripe(
+      nuxtApp.$config.public.stripe.key,
+      nuxtApp.$config.public.stripe.options
+    )
   }
 
-  const stripe = loadStripe(publishableKey, clientConfig)
-  return stripe
+  onMounted(async () => {
+    if (!isLoading.value) {
+      const _stripe = await _loadStripe()
+      stripe.value = _stripe
+      isLoading.value = false
+    }
+  })
+
+  return stripe 
 }
