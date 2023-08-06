@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v2.0.0
+
+[compare changes](https://github.com/fuentesloic/nuxt-stripe/compare/v1.1.2...v2.0.0)
+
+
+### 🏡 Chore
+
+  - Lint files ([fabb627](https://github.com/fuentesloic/nuxt-stripe/commit/fabb627))
+
+### ❤️  Contributors
+
+- Giraud Florent <florent giraud>
+
 ## v1.1.2
 
 [compare changes](https://github.com/fuentesloic/nuxt-stripe/compare/v1.2.1...v1.1.2)
