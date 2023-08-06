@@ -1,6 +1,29 @@
 # Changelog
 
 
+## v1.1.2
+
+[compare changes](https://github.com/fuentesloic/nuxt-stripe/compare/v1.2.1...v1.1.2)
+
+
+### 🩹 Fixes
+
+  - Hydration issue ([e68ff2a](https://github.com/fuentesloic/nuxt-stripe/commit/e68ff2a))
+
+### 💅 Refactors
+
+  - Remove plugin for only composable ([1a38280](https://github.com/fuentesloic/nuxt-stripe/commit/1a38280))
+
+### 🏡 Chore
+
+  - Remove useless flag ([998ee2f](https://github.com/fuentesloic/nuxt-stripe/commit/998ee2f))
+  - Resolve conflict ([206fef3](https://github.com/fuentesloic/nuxt-stripe/commit/206fef3))
+  - Use onMounted instead of beforeMount ([226959f](https://github.com/fuentesloic/nuxt-stripe/commit/226959f))
+
+### ❤️  Contributors
+
+- Giraud Florent <florent giraud>
+
 ## v1.1.1
 
 [compare changes](https://github.com/fuentesloic/nuxt-stripe/compare/v1.1.0...v1.1.1)
