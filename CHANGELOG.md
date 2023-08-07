@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v3.0.0
+
+[compare changes](https://github.com/fuentesloic/nuxt-stripe/compare/v2.0.0...v3.0.0)
+
 ## v2.0.0
 
 [compare changes](https://github.com/fuentesloic/nuxt-stripe/compare/v1.1.2...v2.0.0)
