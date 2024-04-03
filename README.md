@@ -61,14 +61,7 @@ const stripe = await useClientStripe()
 1. Add `@unlok-co/nuxt-stripe` dependency to your project
 
 ```bash
-# Using pnpm
-pnpm add -D @unlok-co/nuxt-stripe
-
-# Using yarn
-yarn add --dev @unlok-co/nuxt-stripe
-
-# Using npm
-npm install --save-dev @unlok-co/nuxt-stripe
+npx nuxi@latest module add stripe-next
 ```
 
 2. Add `@unlok-co/nuxt-stripe` to the `modules` section of `nuxt.config.ts`
