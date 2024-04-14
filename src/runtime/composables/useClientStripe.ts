@@ -1,5 +1,7 @@
 import { onMounted, useNuxtApp, useState } from "#imports"
-import { Stripe, loadStripe } from '@stripe/stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
+
+import type { Stripe } from '@stripe/stripe-js'
 /**
  * useClientStripe function
  *
@@ -35,5 +37,5 @@ export default async function useClientStripe() {
     }
   })
 
-  return stripe 
+  return stripe
 }
