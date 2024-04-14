@@ -21,7 +21,7 @@ export default async function useClientStripe() {
 
     isLoading.value = true
 
-    if (!nuxtApp.$config.public.stripe.key) console.warn("no key given for client service")
+    if (!nuxtApp.$config.public.stripe.key) console.warn("no key given for Stripe client service")
 
     return await loadStripe(
       nuxtApp.$config.public.stripe.key,
