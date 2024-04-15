@@ -19,18 +19,19 @@ The module provides a `useServerStripe` function to create a Stripe instance on 
 This instance can be used to interact with the Stripe API.
 
 #### Example
+
 ```ts
-import { defineEventHandler } from 'h3'
-import { useServerStripe } from '#stripe/server'
+import { defineEventHandler } from "h3";
+import { useServerStripe } from "#stripe/server";
 
 export default defineEventHandler(async (event) => {
-  const stripe = await useServerStripe(event)
-  console.info("Stripe instance:", stripe)
+  const stripe = await useServerStripe(event);
+  console.info("Stripe instance:", stripe);
 
   return {
-    version: stripe.VERSION
-  }
-})
+    version: stripe.VERSION,
+  };
+});
 ```
 
 ### Client-side usage
@@ -39,20 +40,21 @@ On the client-side, you can use the `useClientStripe` function to get a Stripe i
 This composable is a wrap around the [`loadStripe`](https://github.com/stripe/stripe-js#loadstripe) and can be used in pages or plugins.
 
 #### Example
+
 ```vue
 <template>
   <h1>Nuxt Stripe instance</h1>
   <div>
-    {{ stripe ? stripe : 'Loading...'}}
+    {{ stripe ? stripe : "Loading..." }}
   </div>
 </template>
 
 <script setup lang="ts">
 // Call the composable to get the Stripe instance
-const stripe = await useClientStripe()
+const stripe = await useClientStripe();
 
 // Use the Stripe instance to interact with the stripe.js library
-// stripe.redirectToCheckout(...)
+// https://docs.stripe.com/js
 </script>
 ```
 
@@ -68,38 +70,32 @@ npx nuxi@latest module add stripe-next
 
 ```ts
 export default defineNuxtConfig({
-  modules: [
-    '@unlok-co/nuxt-stripe'
-  ],
-})
+  modules: ["@unlok-co/nuxt-stripe"],
+});
 ```
 
 ## Configuration
 
 ```ts
 export default defineNuxtConfig({
-  modules: [
-    '@unlok-co/nuxt-stripe'
-  ],
+  modules: ["@unlok-co/nuxt-stripe"],
   stripe: {
     // Server
     server: {
-      key: 'sk_test_123',
+      key: "sk_test_123",
       options: {
         // your api options override for stripe server side
-        apiVersion: '2022-11-15', // optional, default is '2022-11-15'
-      }
-    // CLIENT
+        // https://github.com/stripe/stripe-node?tab=readme-ov-file#configuration
+      },
+      // CLIENT
     },
     client: {
-      key: 'pk_test_123',
-      // your api options override for stripe client side
-      options: {
-
-      }
-    }
-  }
-})
+      key: "pk_test_123",
+      // your api options override for stripe client side https://stripe.com/docs/js/initializing#init_stripe_js-options
+      options: {},
+    },
+  },
+});
 ```
 
 For all available `serverConfig` options take a look at the [official repo README](https://github.com/stripe/stripe-node#configuration). While for the `clientConfig` options take a look at the [official docs](https://stripe.com/docs/js/initializing#init_stripe_js-options).
@@ -142,22 +138,13 @@ yarn release
 npm run release
 ```
 
-## Nuxt 2
-
-Disclaimer! Nuxt 2's end-of-life is planned for 31st Dec, 2023.
-The following stripe module is only for **nuxt 2** purpose and does **not** cover server side:
-- [nuxt2-stripe - doc](https://github.com/WilliamDASILVA/nuxt-stripe-module)
-- [nuxt2-stripe - latest release](https://github.com/WilliamDASILVA/nuxt-stripe-module/releases/tag/3.0.0)
-
 <!-- Badges -->
+
 [npm-version-src]: https://img.shields.io/npm/v/@unlok-co/nuxt-stripe/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-version-href]: https://npmjs.com/package/@unlok-co/nuxt-stripe
-
 [npm-downloads-src]: https://img.shields.io/npm/dm/@unlok-co/nuxt-stripe.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-downloads-href]: https://npmjs.com/package/@unlok-co/nuxt-stripe
-
 [license-src]: https://img.shields.io/npm/l/@unlok-co/nuxt-stripe.svg?style=flat&colorA=18181B&colorB=28CF8D
 [license-href]: https://npmjs.com/package/@unlok-co/nuxt-stripe
-
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com

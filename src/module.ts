@@ -1,13 +1,14 @@
 import { defineNuxtModule, createResolver } from '@nuxt/kit'
-import { StripeConstructorOptions } from '@stripe/stripe-js/types/stripe-js'
 import defu from 'defu'
 import Stripe from 'stripe'
 import { fileURLToPath } from 'url'
 
+import type { StripeConstructorOptions } from '@stripe/stripe-js'
+
 export interface ServerStripeOptions {
   key?: string | null,
   options?: Stripe.StripeConfig
-} 
+}
 
 export interface ClientStripeOptions  {
   key?: string | null;
@@ -30,9 +31,7 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
       server: {
         key: null,
-        options: {
-          apiVersion: '2022-11-15'
-        }
+        options: {}
       },
       client: {
         key: null,
