@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.0.0
+
+[compare changes](https://github.com/fuentesloic/nuxt-stripe/compare/v2.1.0...v3.0.0)
+
+### 🚀 Enhancements
+
+- ⚠️  Update version to major release ([e044376](https://github.com/fuentesloic/nuxt-stripe/commit/e044376))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Update version to major release ([e044376](https://github.com/fuentesloic/nuxt-stripe/commit/e044376))
+
+### ❤️ Contributors
+
+- Florent Giraud ([@flozero](http://github.com/flozero))
+
 ## v2.1.0
 
 [compare changes](https://github.com/fuentesloic/nuxt-stripe/compare/v2.0.0...v2.1.0)
