@@ -1,5 +1,30 @@
 # Changelog
 
+## v2.1.0
+
+[compare changes](https://github.com/fuentesloic/nuxt-stripe/compare/v2.0.0...v2.1.0)
+
+### 🚀 Enhancements
+
+- Upgrade general versions of all stripe dependencies and others ([#29](https://github.com/fuentesloic/nuxt-stripe/pull/29))
+
+### 📖 Documentation
+
+- Use new `nuxi module add` command in installation ([#28](https://github.com/fuentesloic/nuxt-stripe/pull/28))
+
+### 🏡 Chore
+
+- **release:** V2.0.0 ([41bd7a4](https://github.com/fuentesloic/nuxt-stripe/commit/41bd7a4))
+- **release:** V3.0.0 ([78032fc](https://github.com/fuentesloic/nuxt-stripe/commit/78032fc))
+- Update package version to correct version ([229f26a](https://github.com/fuentesloic/nuxt-stripe/commit/229f26a))
+- Fix changelog ([658c69a](https://github.com/fuentesloic/nuxt-stripe/commit/658c69a))
+
+### ❤️ Contributors
+
+- Florent Giraud ([@flozero](http://github.com/flozero))
+- Daniel Roe ([@danielroe](http://github.com/danielroe))
+- Giraud Florent <florent giraud>
+
 ## v2.0.0
 
 [compare changes](https://github.com/fuentesloic/nuxt-stripe/compare/v1.1.2...v2.0.0)
