@@ -12,5 +12,6 @@
 
 <script setup lang="ts">
 import { useClientStripe } from '#imports'
+
 const stripeClient = await useClientStripe()
 </script>
