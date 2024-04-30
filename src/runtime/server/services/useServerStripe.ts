@@ -18,10 +18,8 @@ export const useServerStripe = async (event: H3Event): Promise<Stripe> => {
 
   if (!key) console.warn('no key given for server service')
 
-  // Stripe's TypeScript definition may throw an error if the apiVersion is not set
-  // We are safely ignoring this error by using @ts-ignore directive
+  // @ts-expect-error Stripe's TypeScript definition may throw an error if the apiVersion is not set
   // @docs — https://stripe.com/docs/api/versioning
-  // @ts-expect-error
   const stripe = new Stripe(key, options)
 
   // Store the initialized Stripe instance in the event context for future use

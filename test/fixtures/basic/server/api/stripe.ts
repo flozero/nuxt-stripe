@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
 
   return {
     status: 200,
-    // @ts-expect-error
+    // @ts-expect-error VERSION is not typed
     version: stripe.VERSION,
   }
 })
