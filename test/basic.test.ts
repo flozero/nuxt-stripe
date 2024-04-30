@@ -1,7 +1,7 @@
 // https://vitest.dev/guide/debugging.html#vscode to debug tests
 
-import { describe, it, expect } from 'vitest'
 import { fileURLToPath } from 'node:url'
+import { describe, it, expect } from 'vitest'
 import { setup, $fetch } from '@nuxt/test-utils'
 
 describe('ssr', async () => {
@@ -19,14 +19,13 @@ describe('ssr', async () => {
     expect(html).toContain(`{stripe:{key:"pk_test123",options:{}}`)
   })
 
-
   it('validates ssr config', async () => {
     const serverResponse = await $fetch('/')
     const serverRenderedHtml = serverResponse.data
-  
+
     const clientResponse = await $fetch('/client-rendered')
     const clientRenderedHtml = clientResponse.data
-  
+
     expect(serverRenderedHtml).toEqual(clientRenderedHtml)
   })
 })

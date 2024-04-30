@@ -1,18 +1,18 @@
+import { fileURLToPath } from 'node:url'
 import { defineNuxtModule, createResolver } from '@nuxt/kit'
 import defu from 'defu'
-import Stripe from 'stripe'
-import { fileURLToPath } from 'url'
+import type Stripe from 'stripe'
 
 import type { StripeConstructorOptions } from '@stripe/stripe-js'
 
 export interface ServerStripeOptions {
-  key?: string | null,
+  key?: string | null
   options?: Stripe.StripeConfig
 }
 
-export interface ClientStripeOptions  {
-  key?: string | null;
-  options?: StripeConstructorOptions;
+export interface ClientStripeOptions {
+  key?: string | null
+  options?: StripeConstructorOptions
 }
 
 export interface ModuleOptions {
@@ -25,20 +25,20 @@ export default defineNuxtModule<ModuleOptions>({
     name: '@unlok-co/nuxt-stripe',
     configKey: 'stripe',
     compatibility: {
-      nuxt: '^3.0.0'
-    }
+      nuxt: '^3.0.0',
+    },
   },
   defaults: {
-      server: {
-        key: null,
-        options: {}
-      },
-      client: {
-        key: null,
-        options: {}
-      }
+    server: {
+      key: null,
+      options: {},
+    },
+    client: {
+      key: null,
+      options: {},
+    },
   },
-  setup (options, nuxt) {
+  setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
     // Public runtimeConfig
@@ -60,7 +60,7 @@ export default defineNuxtModule<ModuleOptions>({
 
       // Inline module runtime in Nitro bundle
       nitroConfig.externals = defu(typeof nitroConfig.externals === 'object' ? nitroConfig.externals : {}, {
-        inline: [resolve('./runtime')]
+        inline: [resolve('./runtime')],
       })
       nitroConfig.alias['#stripe/server'] = resolve(runtimeDir, './server/services')
     })
@@ -68,5 +68,5 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.hook('prepare:types', (options) => {
       options.tsConfig.compilerOptions.paths['#stripe/server'] = [resolve(runtimeDir, './server/services')]
     })
-  }
+  },
 })

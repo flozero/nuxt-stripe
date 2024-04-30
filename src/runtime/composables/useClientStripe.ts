@@ -1,7 +1,7 @@
-import { onMounted, useNuxtApp, useState } from "#imports"
 import { loadStripe } from '@stripe/stripe-js'
 
 import type { Stripe } from '@stripe/stripe-js'
+import { onMounted, useNuxtApp, useState } from '#imports'
 /**
  * useClientStripe function
  *
@@ -15,17 +15,17 @@ export default async function useClientStripe() {
   const isLoading = useState('stripe-client-loading', () => false)
 
   async function _loadStripe() {
-    if (stripe.value){
+    if (stripe.value) {
       return stripe.value
     }
 
     isLoading.value = true
 
-    if (!nuxtApp.$config.public.stripe.key) console.warn("no key given for Stripe client service")
+    if (!nuxtApp.$config.public.stripe.key) console.warn('no key given for Stripe client service')
 
     return await loadStripe(
       nuxtApp.$config.public.stripe.key,
-      nuxtApp.$config.public.stripe.options
+      nuxtApp.$config.public.stripe.options,
     )
   }
 
