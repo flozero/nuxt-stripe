@@ -25,7 +25,7 @@ export default defineNuxtModule<ModuleOptions>({
     name: '@unlok-co/nuxt-stripe',
     configKey: 'stripe',
     compatibility: {
-      nuxt: '^3.0.0',
+      nuxt: '>=3.0.0',
     },
   },
   defaults: {
