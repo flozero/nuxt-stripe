@@ -102,6 +102,28 @@ For all available `serverConfig` options take a look at the [official repo READM
 
 > We highly recommend you put your **production** keys in your `.env` file to avoid committing them
 
+### Alternatively using [Runtime Config](https://nuxt.com/docs/guide/going-further/runtime-config)
+
+```ts
+export default defineNuxtConfig({
+  modules: ["@unlok-co/nuxt-stripe"],
+  runtimeConfig: {
+    // Server
+    stripe: {
+      key: 'sk_test_123',
+      options: {},
+    },
+    // Client
+    public: {
+      stripe: {
+        key: 'pk_test_123',
+        options: {},
+      },
+    },
+  },
+});
+```
+
 ## Development
 
 Initial step: Clone this repository
