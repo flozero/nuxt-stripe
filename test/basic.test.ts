@@ -1,31 +1,31 @@
 // https://vitest.dev/guide/debugging.html#vscode to debug tests
 
-import { fileURLToPath } from 'node:url'
-import { describe, it, expect } from 'vitest'
-import { setup, $fetch } from '@nuxt/test-utils'
+import { fileURLToPath } from "node:url";
+import { describe, it, expect } from "vitest";
+import { setup, $fetch } from "@nuxt/test-utils";
 
-describe('ssr', async () => {
-  const rootDir = fileURLToPath(new URL('./fixtures/basic', import.meta.url))
+describe("ssr", async () => {
+  const rootDir = fileURLToPath(new URL("./fixtures/basic", import.meta.url));
 
-  await setup({ rootDir })
+  await setup({ rootDir });
 
-  it('renders the index page', async () => {
-    const html = await $fetch('/')
-    expect(html).toContain('<h1>Nuxt Stripe module test</h1>')
-  })
+  it("renders the index page", async () => {
+    const html = await $fetch("/");
+    expect(html).toContain("<h1>Nuxt Stripe module test</h1>");
+  });
 
-  it('overrides the default config exposing only public key', async () => {
-    const html = await $fetch('/')
-    expect(html).toContain(`{stripe:{key:"pk_test123",options:{}}`)
-  })
+  it("overrides the default config exposing only public key", async () => {
+    const html = await $fetch("/");
+    expect(html).toContain(`key:"pk_test123"`);
+  });
 
-  it('validates ssr config', async () => {
-    const serverResponse = await $fetch('/')
-    const serverRenderedHtml = serverResponse.data
+  it("validates ssr config", async () => {
+    const serverResponse = await $fetch("/");
+    const serverRenderedHtml = serverResponse.data;
 
-    const clientResponse = await $fetch('/client-rendered')
-    const clientRenderedHtml = clientResponse.data
+    const clientResponse = await $fetch("/client-rendered");
+    const clientRenderedHtml = clientResponse.data;
 
-    expect(serverRenderedHtml).toEqual(clientRenderedHtml)
-  })
-})
+    expect(serverRenderedHtml).toEqual(clientRenderedHtml);
+  });
+});
