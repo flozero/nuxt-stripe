@@ -13,52 +13,7 @@ Nuxt module for application using stripe.
 
 This Nuxt module provides an easy way to integrate Stripe in your Nuxt application, both on the client-side and server-side. It utilizes the official [stripe](https://www.npmjs.com/package/stripe) package for server-side usage and [@stripe/stripe-js](https://www.npmjs.com/package/@stripe/stripe-js) for the client-side.
 
-### Server-side usage
-
-The module provides a `useServerStripe` function to create a Stripe instance on the server-side.
-This instance can be used to interact with the Stripe API.
-
-#### Example
-
-```ts
-import { defineEventHandler } from "h3";
-import { useServerStripe } from "#stripe/server";
-
-export default defineEventHandler(async (event) => {
-  const stripe = await useServerStripe(event);
-  console.info("Stripe instance:", stripe);
-
-  return {
-    version: stripe.VERSION,
-  };
-});
-```
-
-### Client-side usage
-
-On the client-side, you can use the `useClientStripe` function to get a Stripe instance.
-This composable is a wrap around the [`loadStripe`](https://github.com/stripe/stripe-js#loadstripe) and can be used in pages or plugins.
-
-#### Example
-
-```vue
-<template>
-  <h1>Nuxt Stripe instance</h1>
-  <div>
-    {{ stripe ? stripe : "Loading..." }}
-  </div>
-</template>
-
-<script setup lang="ts">
-// Call the composable to get the Stripe instance
-const stripe = await useClientStripe();
-
-// Use the Stripe instance to interact with the stripe.js library
-// https://docs.stripe.com/js
-</script>
-```
-
-## Quick Setup
+## Installation
 
 1. Add `@unlok-co/nuxt-stripe` dependency to your project
 
@@ -76,13 +31,17 @@ export default defineNuxtConfig({
 
 ## Configuration
 
+For all available `serverConfig` options take a look at the [official repo README](https://github.com/stripe/stripe-node#configuration). While for the `clientConfig` options take a look at the [official docs](https://stripe.com/docs/js/initializing#init_stripe_js-options).
+
+### Using Options
+
 ```ts
 export default defineNuxtConfig({
   modules: ["@unlok-co/nuxt-stripe"],
   stripe: {
     // Server
     server: {
-      key: "sk_test_123",
+      key: process.env.STRIPE_SECRET_KEY,
       options: {
         // your api options override for stripe server side
         // https://github.com/stripe/stripe-node?tab=readme-ov-file#configuration
@@ -90,17 +49,14 @@ export default defineNuxtConfig({
       // CLIENT
     },
     client: {
-      key: "pk_test_123",
+      key: process.env.STRIPE_PUBLIC_KEY,
+      // manualClientLoad: true, // if you want to have control where you are going to load the client
       // your api options override for stripe client side https://stripe.com/docs/js/initializing#init_stripe_js-options
       options: {},
     },
   },
 });
 ```
-
-For all available `serverConfig` options take a look at the [official repo README](https://github.com/stripe/stripe-node#configuration). While for the `clientConfig` options take a look at the [official docs](https://stripe.com/docs/js/initializing#init_stripe_js-options).
-
-> We highly recommend you put your **production** keys in your `.env` file to avoid committing them
 
 ### Alternatively using [Runtime Config](https://nuxt.com/docs/guide/going-further/runtime-config)
 
@@ -110,18 +66,162 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Server
     stripe: {
-      key: 'sk_test_123',
+      key: process.env.STRIPE_SECRET_KEY,
       options: {},
     },
     // Client
     public: {
       stripe: {
-        key: 'pk_test_123',
+        key: process.env.STRIPE_PUBLIC_KEY,
         options: {},
       },
     },
   },
 });
+```
+
+## Usage
+
+### Server-side
+
+The module provides a `useServerStripe` function to create a Stripe instance on the server-side.
+This instance can be used to interact with the Stripe API.
+
+#### Minimum example
+
+```ts
+import { defineEventHandler } from "h3";
+import { useServerStripe } from "#stripe/server";
+
+export default defineEventHandler(async (event) => {
+  const stripe = await useServerStripe(event);
+  console.info("Stripe instance:", stripe);
+
+  return {
+    version: stripe.VERSION,
+  };
+});
+```
+
+#### generate payment intent for stripe elements
+
+At any time you can find a full code at `playground/server/api/create-payment-intent.get.ts` for the server side and `playground/components/OtherComponent.vue`
+for the client side.
+
+Server side example:
+
+```ts
+export default defineEventHandler(async (event) => {
+  const stripe = await useServerStripe(event);
+  const orderAmount = 1400;
+  let paymentIntent;
+
+  try {
+    paymentIntent = await stripe.paymentIntents.create({
+      currency: "usd",
+      amount: orderAmount,
+      automatic_payment_methods: { enabled: true },
+    });
+
+    return {
+      clientSecret: paymentIntent.client_secret,
+      error: null,
+    };
+  } catch (e) {
+    return {
+      clientSecret: null,
+      error: e,
+    };
+  }
+});
+```
+
+Client side example:
+
+```ts
+const { stripe } = useClientStripe();
+
+watch(
+  stripe,
+  async () => {
+    if (stripe.value) {
+      // https://github.com/stripe-samples/accept-a-payment/blob/main/payment-element/client/vue-cva/src/components/SrCheckoutForm.vue
+      const { clientSecret, error } = await $fetch(
+        "/api/create-payment-intent"
+      );
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      const elements = stripe.value.elements({
+        clientSecret: clientSecret as string,
+      });
+      const linkAuthenticationElement = elements.create("linkAuthentication");
+      linkAuthenticationElement.mount("#linkAuthenticationElement");
+    }
+  },
+  {
+    immediate: true,
+  }
+);
+```
+
+### Client-side usage
+
+On the client-side, you can use the `useClientStripe`. This is going to expose to you an object with
+
+```ts
+{
+  stripe, // This composable is a wrap around the [`loadStripe`](https://github.com/stripe/stripe-js#loadstripe) and can be used in pages or plugins.
+    isLoading, // You don't really need this in practice but we did expose it
+    loadStipe; // you can also manually loadStripe if you have disabled auto load for stripe
+}
+```
+
+You can see the actual code used inside `playground/app.vue` file.
+
+#### Automated load of stripe client side
+
+```vue
+<template>
+  <h1>Nuxt Stripe instance</h1>
+  <div>
+    {{ stripe ? stripe : "Loading..." }}
+  </div>
+</template>
+
+<script setup lang="ts">
+import { watch } from "vue";
+
+const { stripe, isLoading } = await useClientStripe();
+</script>
+```
+
+#### Manually load client side stripe
+
+nuxt.config.ts
+
+```ts
+stripe: {
+    client: {
+      // ...
+      manualClientLoad: true, // this is the part you want
+    },
+      // ...
+},
+```
+
+App.vue
+
+```ts
+import { useNuxtApp, useClientStripe } from "#imports";
+
+const { loadStripe, stripe } = useClientStripe();
+const nuxtApp = useNuxtApp();
+
+// you can leave it empty if you already have defined the keys in the config or override like in this example
+stripe.value = await loadStripe(nuxtApp.$config.public.stripe.key);
 ```
 
 ## Development

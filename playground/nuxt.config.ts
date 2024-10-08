@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   stripe: {
     client: {
       key: process.env.STRIPE_PUBLIC_KEY,
+      manualClientLoad: true,
     },
     server: {
       key: process.env.STRIPE_SECRET_KEY,

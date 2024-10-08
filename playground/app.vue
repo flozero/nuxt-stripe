@@ -4,17 +4,25 @@
     <section>
       <h2>Stripe client</h2>
       <code>
-        {{ stripeClient ? stripeClient : 'Loading...' }}
+        {{ stripe ? "loaded" : "Loading..." }}
       </code>
     </section>
     <OtherComponent />
+    <OtherOverride />
   </main>
 </template>
 
 <script setup lang="ts">
-import { useClientStripe } from '#imports'
+import { useNuxtApp, useClientStripe } from "#imports";
 
-const stripeClient = await useClientStripe()
+// As we have defined manualClientLoad: true in the module options, we need to manually load the stripe client
+// That means you have to setup the stripe client in the root component of your app
+// This let you have multiple stripe clients in your app and not rely on the module to load the client
+const { loadStripe, stripe } = useClientStripe();
+const nuxtApp = useNuxtApp();
+
+// you can leave it empty if you already have defined the keys in the config or override like in this example
+stripe.value = await loadStripe(nuxtApp.$config.public.stripe.key);
 </script>
 
 <style>
@@ -26,7 +34,8 @@ html {
   margin: 1rem;
 }
 
-h1, h2  {
+h1,
+h2 {
   margin: 0 0 1.5rem;
 }
 
