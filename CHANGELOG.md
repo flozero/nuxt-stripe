@@ -1,5 +1,33 @@
 # Changelog
 
+## v4.0.0
+
+[compare changes](https://github.com/fuentesloic/nuxt-stripe/compare/v3.0.0...v4.0.0)
+
+### 🚀 Enhancements
+
+- **stripe:** ⚠️  Major version about for stripe ([#39](https://github.com/fuentesloic/nuxt-stripe/pull/39))
+
+### 📖 Documentation
+
+- Add Runtime Config section ([#37](https://github.com/fuentesloic/nuxt-stripe/pull/37))
+
+### 🏡 Chore
+
+- **release:** V3.0.0 ([8f1b88c](https://github.com/fuentesloic/nuxt-stripe/commit/8f1b88c))
+- Migrate to eslint v9 ([#33](https://github.com/fuentesloic/nuxt-stripe/pull/33))
+- Indicate compatibility with new v4 major ([#36](https://github.com/fuentesloic/nuxt-stripe/pull/36))
+
+#### ⚠️ Breaking Changes
+
+- **stripe:** ⚠️  Major version about for stripe ([#39](https://github.com/fuentesloic/nuxt-stripe/pull/39))
+
+### ❤️ Contributors
+
+- Florent Giraud ([@flozero](http://github.com/flozero))
+- Nicolas Chaintron <nicolas.chaintron@gmail.com>
+- Daniel Roe ([@danielroe](http://github.com/danielroe))
+
 ## v3.0.0
 
 [compare changes](https://github.com/fuentesloic/nuxt-stripe/compare/v2.1.0...v3.0.0)
