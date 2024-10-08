@@ -19,11 +19,11 @@ export default function useClientStripe() {
   async function _loadStripe(
     key: string | undefined = undefined,
     options: ModuleOptions["client"]["options"] | undefined = undefined
-  ) {
+  ): Promise<Stripe | null> {
     const _key = key ?? nuxtApp.$config.public.stripe.key;
     const _options = options ?? nuxtApp.$config.public.stripe.options;
 
-    if (stripe.value) {
+    if (stripe.value && !nuxtApp.$config.public.stripe.manualClientLoad) {
       return stripe.value;
     }
 

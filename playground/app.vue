@@ -8,6 +8,7 @@
       </code>
     </section>
     <OtherComponent />
+    <OtherOverride />
   </main>
 </template>
 
