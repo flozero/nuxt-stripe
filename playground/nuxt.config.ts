@@ -1,11 +1,13 @@
 export default defineNuxtConfig({
-  modules: ['../src/module'],
+  modules: ["../src/module"],
+
   stripe: {
     client: {
-      key: 'pk_test_123',
+      key: process.env.STRIPE_PUBLIC_KEY,
     },
     server: {
-      key: 'sk_test_123',
+      key: process.env.STRIPE_SECRET_KEY,
     },
   },
-})
+  compatibilityDate: "2024-10-07",
+});
