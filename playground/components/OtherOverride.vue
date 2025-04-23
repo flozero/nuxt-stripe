@@ -5,7 +5,6 @@
       <h2>Stripe client</h2>
       <code>
         {{ stripeOverride ? stripeOverride : "Loading..." }}
-        <div id="linkAuthenticationElement" />
       </code>
     </section>
   </div>

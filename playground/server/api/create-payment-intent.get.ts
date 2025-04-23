@@ -17,7 +17,6 @@ export default defineEventHandler(async (event) => {
       amount: orderAmount,
       automatic_payment_methods: { enabled: true },
     });
-
     return {
       clientSecret: paymentIntent.client_secret,
       error: null,
