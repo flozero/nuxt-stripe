@@ -46,8 +46,8 @@ export default defineNuxtConfig({
         // your api options override for stripe server side
         // https://github.com/stripe/stripe-node?tab=readme-ov-file#configuration
       },
-      // CLIENT
     },
+    // Client
     client: {
       key: process.env.STRIPE_PUBLIC_KEY,
       // manualClientLoad: true, // if you want to have control where you are going to load the client
@@ -174,8 +174,8 @@ On the client-side, you can use the `useClientStripe`. This is going to expose t
 ```ts
 {
   stripe, // This composable is a wrap around the [`loadStripe`](https://github.com/stripe/stripe-js#loadstripe) and can be used in pages or plugins.
-    isLoading, // You don't really need this in practice but we did expose it
-    loadStipe; // you can also manually loadStripe if you have disabled auto load for stripe
+  isLoading, // You don't really need this in practice but we did expose it
+  loadStipe; // you can also manually loadStripe if you have disabled auto load for stripe
 }
 ```
 
