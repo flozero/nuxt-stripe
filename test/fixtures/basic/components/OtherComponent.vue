@@ -2,16 +2,17 @@
   <div>Other component using stripe</div>
   <section>
     <h2>Stripe client</h2>
-    <client-only>
-      <code>
-        {{ stripeClient ? stripeClient : 'Loading...' }}
+    <ClientOnly>
+      <div v-if="isLoading">Loading Stripe...</div>
+      <code v-else-if="stripe">
+        Stripe instance: {{ stripe }}
       </code>
-    </client-only>
+      <button v-else @click="loadStripe()">Load Stripe Manually</button>
+    </ClientOnly>
   </section>
 </template>
 
 <script setup lang="ts">
 import { useClientStripe } from '#imports'
-
-const stripeClient = await useClientStripe()
+const { stripe, isLoading, loadStripe } = useClientStripe()
 </script>

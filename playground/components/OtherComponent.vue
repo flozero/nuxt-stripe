@@ -1,14 +1,11 @@
 <template>
-  <div>
-    <div>Other component using stripe</div>
-    <section>
-      <h2>Stripe client</h2>
-      <code>
+  <section>
+    <h2>Stripe client OtherComponent</h2>
+    <code>
         <!-- {{ stripe ? stripe : "Loading..." }} -->
         <div id="linkAuthenticationElement" />
       </code>
-    </section>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -32,6 +29,11 @@ watch(
       );
       if (error) {
         console.error(error);
+        return;
+      }
+
+      if (!clientSecret) {
+        console.error("Client Secret not initialized");
         return;
       }
 

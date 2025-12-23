@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   // See the documentation [0] for the full list of supported parameters.
   //
   // [0] https://stripe.com/docs/api/payment_intents/create
-  const stripe = await useServerStripe(event);
+  const stripe = useServerStripe(event);
   const orderAmount = 1400;
   let paymentIntent;
 

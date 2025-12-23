@@ -8,7 +8,7 @@ export default defineNuxtConfig({
       key: 'pk_test123',
     },
     server: {
-      key: 'pk_test123',
+      key: 'sk_test123',
     },
   },
 })

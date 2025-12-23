@@ -1,14 +1,16 @@
 <template>
   <main>
     <h1>Nuxt - Stripe module playground</h1>
-    <section>
-      <h2>Stripe client</h2>
-      <code>
+    <section class="section">
+      <h2>Stripe client app.vue</h2>
+      <ClientOnly>
+        <code>
         {{ stripe ? "loaded" : "Loading..." }}
       </code>
+      </ClientOnly>
     </section>
-    <OtherComponent />
-    <OtherOverride />
+    <OtherComponent class="section" />
+    <OtherOverride class="section" />
   </main>
 </template>
 
@@ -21,7 +23,7 @@ import { useNuxtApp, useClientStripe } from "#imports";
 const { loadStripe, stripe } = useClientStripe();
 const nuxtApp = useNuxtApp();
 
-// you can leave it empty if you already have defined the keys in the config or override like in this example
+// you can leave loadStripe() empty, if you already have defined the keys in the config or override like in this example
 stripe.value = await loadStripe(nuxtApp.$config.public.stripe.key);
 </script>
 
@@ -45,5 +47,13 @@ section {
   font-family: monospace;
   padding: 1.5rem;
   white-space: pre-wrap;
+}
+
+.section {
+  margin-bottom: 1.5rem;
+}
+
+.section:last-child {
+  margin-bottom: 0;
 }
 </style>

@@ -1,13 +1,10 @@
 <template>
-  <div>
-    <div>Other component using stripe</div>
-    <section>
-      <h2>Stripe client</h2>
-      <code>
+  <section>
+    <h2>Stripe client OtherOverride</h2>
+    <code>
         {{ stripeOverride ? stripeOverride : "Loading..." }}
       </code>
-    </section>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
